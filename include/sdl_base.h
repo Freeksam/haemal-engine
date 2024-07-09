@@ -12,8 +12,7 @@ typedef struct {
 typedef struct {
     uint8_t buffer[WINDOW_WIDTH*WINDOW_HEIGHT*4];
     int pitch;
-    void* texture_info;
-} scene;
+} renderbuffer;
 
-void initialize_sdl(context *c);
-void cleanup_sdl(context *c);
+void initialize_context(context *c);
+void cleanup_context(context *c);

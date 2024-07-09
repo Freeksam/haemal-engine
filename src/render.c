@@ -3,16 +3,16 @@
 #include "sdl_base.h"
 #include "render.h"
 
-void render_scene(context *c, scene *s) {
+void render_buffer(context *c, renderbuffer *rb) {
     
-    (*s).pitch = 0; 
-    (*s).texture_info = NULL;
+    (*rb).pitch = 0;
+    void *texture_info = NULL;
 
-    if (SDL_LockTexture((*c).texture, NULL, &(*s).texture_info, &(*s).pitch) != 0) {
+    if (SDL_LockTexture((*c).texture, NULL, &texture_info, &(*rb).pitch) != 0) {
         printf("texture could not be locked: %s", SDL_GetError());
     } else {
-        memcpy((*s).texture_info, (*s).buffer, (*s).pitch * WINDOW_HEIGHT);
-        memset((*s).buffer, 0, sizeof((*s).buffer));
+        memcpy(texture_info, (*rb).buffer, (*rb).pitch * WINDOW_HEIGHT);
+        memset((*rb).buffer, 0, sizeof((*rb).buffer));
     }
 
     SDL_UnlockTexture((*c).texture);

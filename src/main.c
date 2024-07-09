@@ -11,13 +11,18 @@
 #include "vector.h"
 #include "render.h"
 
-context main_context;
-scene   main_scene;
+context        main_context;
+renderbuffer   main_renderbuffer;
 
 int main() {
 
-    initialize_sdl(&main_context);
-    render_scene(&main_context, &main_scene);
+    initialize_context(&main_context);
+
+    vector2i points[3] = {{300, 300}, {200, 200}, {200, 350}};
+
+    draw_triangle(main_renderbuffer.buffer, B_YELLOW, points);
+
+    render_buffer(&main_context, &main_renderbuffer);
         
     bool quit = false;
     SDL_Event ev;
@@ -33,7 +38,7 @@ int main() {
         }
     }
 
-    cleanup_sdl(&main_context);
+    cleanup_context(&main_context);
     SDL_Quit();
 
     return 0;

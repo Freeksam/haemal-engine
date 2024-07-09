@@ -3,7 +3,7 @@
 
 #include "../include/sdl_base.h"
 
-void initialize_sdl(context *c) {
+void initialize_context(context *c) {
 
     if(SDL_Init(SDL_INIT_EVERYTHING) != 0)
         printf("SDL could not be initialized: %s", SDL_GetError());
@@ -28,7 +28,7 @@ void initialize_sdl(context *c) {
     if(!(*c).texture) printf("texture could not be created: %s", SDL_GetError());
 }
 
-void cleanup_sdl(context *c) {
+void cleanup_context(context *c) {
     SDL_DestroyTexture((*c).texture);
     SDL_DestroyRenderer((*c).renderer);
     SDL_DestroyWindow((*c).window);
